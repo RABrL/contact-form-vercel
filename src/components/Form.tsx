@@ -3,6 +3,7 @@
 import Button from '@/components/Button'
 import Input from '@/components/Input'
 import { toast } from 'sonner'
+import confetti from 'canvas-confetti'
 
 export default function Form () {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -13,7 +14,7 @@ export default function Form () {
 
     // vamos a llamar a la API
     const promise = async () => await new Promise((resolve, reject) => {
-      fetch('/api/kv-send-message', {
+      fetch('/api/messages', {
         method: 'POST',
         body: JSON.stringify({ email, name, message }),
         headers: {
@@ -26,6 +27,7 @@ export default function Form () {
         }
         resolve(data)
         form.reset()
+        confetti()
       }).catch((e) => {
         reject(e.message)
       })

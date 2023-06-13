@@ -1,4 +1,5 @@
 import kv from '@vercel/kv'
+import { NextResponse } from 'next/server'
 
 export async function POST (req: Request) {
   const { name, email, message } = await req.json()
@@ -14,6 +15,18 @@ export async function POST (req: Request) {
 
     return new Response('Contact saved!', { status: 200 })
   } catch (error) {
+    return new Response('Internal error', { status: 500 })
+  }
+}
+
+export async function GET () {
+  try {
+    const keys = await kv.keys('contact-*')
+    const messages = await kv.mget(...keys)
+    
+    return NextResponse.json(messages)
+  } catch (e) {
+    console.log(e)
     return new Response('Internal error', { status: 500 })
   }
 }
