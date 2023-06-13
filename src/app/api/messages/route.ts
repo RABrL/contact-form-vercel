@@ -23,7 +23,7 @@ export async function GET () {
   try {
     const keys = await kv.keys('contact-*')
     const messages = await kv.mget(...keys)
-    
+
     return NextResponse.json(messages)
   } catch (e) {
     console.log(e)
