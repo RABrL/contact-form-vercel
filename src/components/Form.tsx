@@ -27,7 +27,7 @@ export default function Form () {
         }
         resolve(data)
         form.reset()
-        confetti()
+        void confetti()
       }).catch((e) => {
         reject(e.message)
       })
