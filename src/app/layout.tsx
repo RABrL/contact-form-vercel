@@ -1,5 +1,6 @@
 import './globals.css'
 import { Roboto } from 'next/font/google'
+import Toaster from '@/components/Toaster'
 
 const roboto = Roboto({ weight: '400', subsets: ['latin'] })
 
@@ -15,6 +16,7 @@ export default function RootLayout ({
 }) {
   return (
     <html lang='es'>
+      <Toaster />
       <body className={roboto.className}>{children}</body>
     </html>
   )
